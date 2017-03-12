@@ -2,8 +2,9 @@
 from kmeans import *
 from PIL import Image
 
-# img = Image.open('data/E3/AfghanGirl.jpg')
-img = Image.open('data/E3/Tipasexy_1_rubia_Obvio.jpg')
+imgname = 'data/E3/AfghanGirlEye.jpg'
+img = Image.open(imgname)
+#img = Image.open('data/E3/Tipasexy_1_rubia_Obvio.jpg')
 
 rgb_img = img.convert('RGB')
 
@@ -22,7 +23,8 @@ print(list_of_pixels[0])
 print(type(list_of_pixels[0]))
 
 
-for i in range(32, 33):
+ranges = [2, 4, 8, 16, 32, 64, 128]
+for i in ranges:
 
     c, J, k = k_means(list_of_pixels, i)
 
@@ -42,4 +44,11 @@ for i in range(32, 33):
 
     new_image = Image.new(img.mode, img.size)
     new_image.putdata(new_list_of_pixels)
+
+    print("Image: ", i)
+    
+
+    name = imgname[:-4] + "[" + str(i) + "]" + ".jpg"
+    new_image.save(name)
+
     new_image.show()
