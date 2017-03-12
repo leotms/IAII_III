@@ -48,8 +48,15 @@ def converged(oldk, newk):
     return oldk == newk
 
 def clustering(X,k):
+
     n_examples = len(X)
     c = np.zeros(n_examples).tolist()
+
+    clusters = []
+
+    #initializing clusters
+    for i in range(len(k)):
+        clusters.append([])
 
     for i in range(n_examples):
         index = 0
@@ -61,27 +68,24 @@ def clustering(X,k):
                     index = j
                     min_dist = new_min
         c[i] = index
+        clusters[index].append(X[i])
 
-    return c
 
-def rearrange_k(X,c,k):
+    return c, clusters
 
-    clusters = []
+def rearrange_k(k, clusters):
+
     new_k    = []
 
-    #Separate clusters
+    #Initializate new k
     for i in range(len(k)):
-        clusters.append([])
         new_k.append([])
-
-    for i in range(len(X)):
-        clusters[c[i]].append(X[i])
 
     for i in range(len(k)):
         if k != []:
             new_k[i] = calculate_mean(clusters[i])
             if new_k[i] == []:
-                # this means this cluster is emptyd
+                # this means this cluster is empty
                 pass
                 # print("Cluster %d is empty"%(i))
 
@@ -91,17 +95,17 @@ def k_means(X, n):
 
     oldk = random_initialize(X, n)
 
-    c = clustering(X, oldk)
+    c, clusters = clustering(X, oldk)
 
-    newk = rearrange_k(X,c, oldk)
+    newk = rearrange_k(clusters, oldk)
 
 
     j = 1
 
     while not converged(oldk, newk):
         oldk = newk
-        c = clustering(X,oldk)
-        newk = rearrange_k(X,c,oldk)
+        c, clusters = clustering(X, oldk)
+        newk = rearrange_k(clusters, oldk)
         j += 1
         print(j)
 
