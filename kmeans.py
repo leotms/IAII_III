@@ -1,6 +1,5 @@
 import numpy  as np
 from math import sqrt
-from sys import maxsize
 from random import random, sample
 
 def calculate_distance(x, y):
@@ -85,9 +84,7 @@ def rearrange_k(k, clusters):
         if k != []:
             new_k[i] = calculate_mean(clusters[i])
             if new_k[i] == []:
-                # this means this cluster is empty
                 pass
-                # print("Cluster %d is empty"%(i))
 
     return new_k
 
@@ -97,7 +94,7 @@ def k_means(X, n):
 
     c, clusters = clustering(X, oldk)
 
-    newk = rearrange_k(clusters, oldk)
+    newk = rearrange_k(oldk, clusters)
 
 
     j = 1
@@ -105,7 +102,7 @@ def k_means(X, n):
     while not converged(oldk, newk):
         oldk = newk
         c, clusters = clustering(X, oldk)
-        newk = rearrange_k(clusters, oldk)
+        newk = rearrange_k(oldk, clusters)
         j += 1
         print(j)
 
