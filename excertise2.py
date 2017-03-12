@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
         #Tun k_means several times to find the best custering sets
         for j in range(100):
-            c, J = k_means(X, i)
+            c, J, k = k_means(X, i)
             if J > min_J:
                 min_J = J
                 best_c = c

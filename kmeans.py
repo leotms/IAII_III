@@ -81,7 +81,7 @@ def rearrange_k(X,c,k):
         if k != []:
             new_k[i] = calculate_mean(clusters[i])
             if new_k[i] == []:
-                # this means this cluster is empty
+                # this means this cluster is emptyd
                 pass
                 # print("Cluster %d is empty"%(i))
 
@@ -103,7 +103,8 @@ def k_means(X, n):
         c = clustering(X,oldk)
         newk = rearrange_k(X,c,oldk)
         j += 1
+        print(j)
 
     J = cost(X, c, newk)
 
-    return c, J
+    return c, J, newk
