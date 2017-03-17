@@ -1,3 +1,12 @@
+'''
+    File:        excercise3.py
+    Description: Defines activities for Excercise 3.
+    Authors:     Joel Rivas        #11-10866
+                 Nicolas Manan     #06-39883
+                 Leonardo Martinez #11-10576
+    Updated:     03/17/2017
+'''
+
 from kmeans import *
 from PIL import Image
 import sys
